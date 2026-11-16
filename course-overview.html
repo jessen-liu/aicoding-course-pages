@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>课程介绍 · 通用 AI 动手实操课升级版</title>
+<style>
+:root{color-scheme:light;
+  --ink:#0f172a;--text:#334155;--sub:#64748b;--line:#e2e8f0;
+  --accent:#2563eb;--accent-2:#06b6d4;--navy:#0b1530;--bg:#eef2f8;
+  --gold:#f59e0b;--card:#ffffff;}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:
+  radial-gradient(1000px 500px at 88% -10%,rgba(37,99,235,.11),transparent 60%),
+  radial-gradient(900px 520px at 2% 108%,rgba(6,182,212,.09),transparent 62%),
+  var(--bg);
+  color:var(--ink);
+  font:16.5px/1.9 -apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Hiragino Sans GB","Microsoft YaHei",sans-serif;
+  -webkit-font-smoothing:antialiased;}
+a{color:var(--accent);text-decoration:none}
+a:hover{text-decoration:underline}
+button{font-family:inherit}
+:focus-visible{outline:2px solid #93c5fd;outline-offset:2px}
+
+/* ===== 左侧栏 ===== */
+.layout{display:grid;grid-template-columns:320px minmax(0,1fr);min-height:100vh;}
+.sidebar{position:sticky;top:0;height:100vh;display:flex;flex-direction:column;gap:26px;
+  padding:30px 22px 22px;color:#fff;overflow-y:auto;
+  background:
+    radial-gradient(520px 280px at 18% 0%,rgba(37,99,235,.38),transparent 66%),
+    radial-gradient(460px 320px at 110% 100%,rgba(6,182,212,.18),transparent 62%),
+    linear-gradient(180deg,#0a142b 0%,#0d1b38 55%,#101f42 100%);}
+.sidebar::-webkit-scrollbar{width:6px}
+.sidebar::-webkit-scrollbar-thumb{background:rgba(255,255,255,.15);border-radius:8px}
+.side-brand{display:flex;gap:12px;align-items:flex-start;}
+.logo{flex:none;width:44px;height:44px;border-radius:14px;display:grid;place-items:center;
+  font-weight:900;font-size:15px;letter-spacing:.5px;color:#fff;
+  background:linear-gradient(135deg,#38bdf8,#2563eb);
+  box-shadow:0 10px 24px rgba(37,99,235,.45);}
+.side-title{margin:0;font-size:18px;line-height:1.5;font-weight:800;letter-spacing:.2px;}
+.ver{display:inline-block;margin-left:2px;padding:2px 7px;border-radius:999px;
+  font-size:10.5px;font-weight:800;letter-spacing:.06em;color:#3b2400;
+  background:linear-gradient(135deg,#fde68a,#f59e0b);
+  box-shadow:0 4px 12px rgba(245,158,11,.3);}
+.side-kicker{margin:6px 0 0;font-size:12px;letter-spacing:.02em;color:rgba(148,163,184,.72);}
+.nav{display:flex;flex-direction:column;gap:6px;}
+.nav-label{font-size:10.5px;letter-spacing:.22em;color:rgba(148,163,184,.5);margin:0 0 6px 10px;}
+.nav-item{display:flex;gap:12px;align-items:flex-start;padding:12px;border-radius:12px;
+  border:1px solid transparent;color:rgba(226,232,240,.72);text-decoration:none;transition:.18s;}
+.nav-item:hover{text-decoration:none;background:rgba(255,255,255,.06);color:#fff;}
+.nav-item .num{font-size:11px;font-weight:800;color:rgba(148,163,184,.55);padding-top:3px;letter-spacing:.05em;}
+.nav-item b{display:block;font-size:14.5px;font-weight:700;line-height:1.45;}
+.nav-item small{display:block;margin-top:2px;font-size:12px;color:rgba(148,163,184,.65);line-height:1.5;}
+.nav-item.active{background:linear-gradient(135deg,rgba(37,99,235,.92),rgba(29,78,216,.78));
+  border-color:rgba(147,197,253,.45);color:#fff;box-shadow:0 12px 28px rgba(2,6,23,.35);}
+.nav-item.active .num{color:#bfdbfe}
+.nav-item.active small{color:rgba(219,234,254,.82)}
+.side-foot{margin-top:auto;padding-top:18px;border-top:1px solid rgba(148,163,184,.16);
+  font-size:11.5px;line-height:1.9;color:rgba(148,163,184,.55);display:flex;flex-direction:column;gap:2px;}
+
+/* ===== 右侧内容 ===== */
+.main{min-width:0;padding:28px 38px 46px;}
+.topline{max-width:1040px;margin:0 auto 14px;display:flex;align-items:center;justify-content:space-between;
+  gap:16px;color:var(--sub);font-size:12.5px;letter-spacing:.04em;}
+.crumb{display:flex;align-items:center;gap:8px;}
+.crumb i{font-style:normal;color:#cbd5e1}
+.crumb b{color:#475569;font-weight:600}
+.progress{display:flex;align-items:center;gap:6px;font-variant-numeric:tabular-nums;color:#94a3b8;}
+.progress #pageNo{color:var(--accent);font-weight:800}
+.page{max-width:1040px;margin:0 auto;background:var(--card);border:1px solid rgba(226,232,240,.9);
+  border-radius:22px;padding:44px 48px 32px;
+  box-shadow:0 24px 70px rgba(15,23,42,.08),0 2px 10px rgba(15,23,42,.04);}
+.panel{display:none;}
+.panel.active{display:block;animation:rise .32s ease both;}
+@keyframes rise{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+.sec-head{margin-bottom:24px;}
+.eyebrow{display:inline-flex;align-items:center;gap:8px;font-size:11.5px;font-weight:800;
+  letter-spacing:.2em;color:var(--accent);}
+.eyebrow::before{content:"";width:22px;height:2px;border-radius:2px;
+  background:linear-gradient(90deg,var(--accent),var(--accent-2));}
+.sec-head h2{margin:10px 0 8px;font-size:30px;line-height:1.4;letter-spacing:.2px;color:var(--navy);}
+.lead{margin:0;color:var(--sub);font-size:15px;line-height:1.8;}
+.doc{margin:14px 0;color:var(--text);font-size:16px;line-height:1.95;}
+.doc b{color:#1e3a8a}
+.intro-grid{display:grid;grid-template-columns:minmax(0,1fr) 300px;gap:30px;align-items:start;}
+.intro-copy p:first-child{margin-top:0}
+.mini-stats-label{margin:24px 0 -8px;font-size:10.5px;letter-spacing:.16em;color:#94a3b8;font-weight:800;}
+.mini-stats{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin-top:22px;}
+.mini-stats div{flex:1;min-width:112px;background:#f8fafc;border:1px solid var(--line);
+  border-radius:12px;padding:10px 14px;}
+.mini-stats b{display:block;font-size:18px;line-height:1.4;color:var(--navy);}
+.mini-stats span{display:block;margin-top:2px;font-size:11px;color:var(--sub);}
+.shot{margin:0;background:#f8fafc;border:1px solid var(--line);border-radius:16px;padding:12px;
+  box-shadow:0 12px 30px rgba(15,23,42,.06);}
+.shot img{display:block;width:100%;height:auto;border-radius:11px;}
+.shot figcaption{margin-top:10px;font-size:12px;line-height:1.6;color:var(--sub);text-align:center;}
+.label{font-size:12.5px;font-weight:800;letter-spacing:.16em;color:#94a3b8;margin:28px 0 0;}
+.features{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;margin:14px 0 10px;}
+.feature{position:relative;background:linear-gradient(180deg,#f8fafc,#fff);border:1px solid var(--line);
+  border-radius:16px;padding:18px;transition:.2s;}
+.feature:hover{transform:translateY(-2px);box-shadow:0 14px 32px rgba(15,23,42,.08);border-color:#c7d2fe;}
+.feature .fno{display:inline-block;font-size:11px;font-weight:800;letter-spacing:.14em;color:var(--accent);
+  background:#eef2ff;border-radius:999px;padding:2px 8px;}
+.feature h3{margin:10px 0 8px;font-size:16.5px;color:var(--navy);}
+.feature p{margin:0;font-size:14px;line-height:1.85;color:var(--sub);}
+.goal{margin:26px 0 4px;border-radius:18px;overflow:hidden;border:1px solid var(--line);background:var(--navy);
+  box-shadow:0 18px 40px rgba(15,23,42,.12);}
+.goal img{display:block;width:100%;height:auto;}
+.facts{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin:20px 0 4px;}
+.fact{background:#f8fafc;border:1px solid var(--line);border-radius:14px;padding:14px 18px;}
+.fact span{display:block;font-size:11.5px;letter-spacing:.12em;color:#94a3b8;font-weight:700;}
+.fact b{display:block;margin-top:4px;font-size:16px;color:var(--navy);}
+.must{margin:24px 0;background:linear-gradient(135deg,#fff7ed,#fffbeb);border:1px solid #fed7aa;
+  border-left:4px solid #f97316;border-radius:14px;padding:18px 22px;}
+.must-head{display:flex;align-items:center;gap:10px;color:#9a3412;font-size:15.5px;margin:0 0 6px;font-weight:700;}
+.must-head::before{content:"!";flex:none;width:22px;height:22px;border-radius:50%;background:#f97316;
+  color:#fff;font-weight:900;font-size:13px;display:grid;place-items:center;}
+.must ol{margin:6px 0 0;padding-left:22px;color:#7c2d12;}
+.must li{margin:8px 0;font-size:15px;line-height:1.8;}
+.sub-title{margin:28px 0 12px;font-size:17px;color:var(--navy);}
+.steps{list-style:none;margin:0;padding:0;display:grid;gap:10px;}
+.steps li{display:flex;gap:14px;background:#f8fafc;border:1px solid var(--line);border-radius:14px;padding:14px 18px;}
+.steps .no{flex:none;width:28px;height:28px;border-radius:50%;background:#e0e7ff;color:#3730a3;
+  font-weight:800;font-size:13px;display:grid;place-items:center;margin-top:2px;}
+.steps b{display:block;font-size:15px;color:var(--navy);margin-bottom:2px;}
+.steps p{margin:0;font-size:14.5px;line-height:1.8;color:var(--sub);}
+.checks{list-style:none;margin:16px 0 0;padding:0;display:grid;
+  grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;}
+.checks li{position:relative;background:#f8fafc;border:1px solid var(--line);border-radius:12px;
+  padding:13px 16px 13px 42px;font-size:14.5px;line-height:1.8;color:var(--text);}
+.checks li::before{content:"✓";position:absolute;left:14px;top:14px;width:20px;height:20px;border-radius:50%;
+  background:#dcfce7;color:#15803d;font-size:12px;font-weight:900;display:grid;place-items:center;}
+.page-foot{display:flex;align-items:center;justify-content:space-between;gap:12px;
+  margin-top:34px;padding-top:20px;border-top:1px solid var(--line);}
+.pager{border:1px solid var(--line);background:#fff;color:#475569;border-radius:10px;padding:9px 15px;
+  font-size:13px;font-weight:700;cursor:pointer;transition:.18s;}
+.pager:hover:not(:disabled){border-color:#bfdbfe;background:#eff6ff;color:var(--accent);}
+.pager:disabled{opacity:.45;cursor:default;}
+.page-count{font-size:12px;color:#94a3b8;letter-spacing:.08em;font-variant-numeric:tabular-nums;}
+.page-note{margin:18px 0 0;text-align:center;font-size:12px;color:#94a3b8;}
+
+@media (max-width:1180px){
+  .layout{grid-template-columns:300px minmax(0,1fr)}
+  .sidebar{padding:24px 18px 18px}
+  .main{padding:24px 24px 40px}
+  .page{padding:36px 34px 28px}
+  .intro-grid{grid-template-columns:minmax(0,1fr) 280px;gap:26px}
+}
+@media (max-width:980px){
+  .layout{grid-template-columns:1fr}
+  .sidebar{position:sticky;top:0;height:auto;z-index:50;flex-direction:row;align-items:center;
+    gap:14px;padding:12px 16px 10px;overflow:visible;flex-wrap:wrap;}
+  .side-brand{align-items:center}
+  .logo{width:34px;height:34px;border-radius:10px;font-size:12px}
+  .side-title{font-size:15px}
+  .side-kicker,.side-foot{display:none}
+  .nav{flex-direction:row;gap:8px;overflow-x:auto;width:100%;order:3;padding-bottom:2px;scrollbar-width:none}
+  .nav::-webkit-scrollbar{display:none}
+  .nav-label{display:none}
+  .nav-item{padding:8px 12px;align-items:center;gap:8px;flex:none;border-radius:999px;
+    background:rgba(255,255,255,.06);border-color:transparent}
+  .nav-item small{display:none}
+  .nav-item b{font-size:13px;white-space:nowrap}
+  .nav-item .num{font-size:10.5px;padding-top:0}
+  .main{padding:18px 14px 34px}
+  .topline{padding:0 2px}
+  .page{border-radius:16px;padding:24px 20px}
+  .intro-grid{grid-template-columns:1fr;gap:20px}
+  .shot{max-width:400px;margin:0 auto;width:100%}
+  .features,.facts,.checks{grid-template-columns:1fr}
+  .sec-head h2{font-size:24px}
+  .page-foot{flex-wrap:wrap}
+  .page-count{order:3;width:100%;text-align:center}
+}
+@media (max-width:640px){
+  .nav-item .num{display:none}
+  .page{padding:20px 16px}
+  .pager{font-size:12px;padding:8px 12px}
+  .side-title{font-size:14px}
+}
+@media (prefers-reduced-motion:reduce){
+  *{animation:none!important;transition:none!important;scroll-behavior:auto!important}
+}
+@media print{
+  .sidebar,.topline,.page-foot,.page-note{display:none!important}
+  .layout{display:block}
+  .main{padding:0}
+  .page{box-shadow:none;border:0;border-radius:0;max-width:none;padding:0}
+  .panel{display:block!important}
+  .panel+.panel{margin-top:30px;padding-top:20px;border-top:1px solid var(--line)}
+  a{color:inherit}
+}
+</style>
+<link rel="stylesheet" href="assets/course-theme.css">
+</head>
+<body class="course-overview">
+
+<div class="layout">
+  <aside class="sidebar">
+    <div class="side-brand">
+      <span class="logo" aria-hidden="true">AI</span>
+      <div>
+        <h1 class="side-title">通用 AI 动手实操课<span class="ver">升级版</span></h1>
+        <p class="side-kicker">课程介绍 · 从玩具到生产力工具</p>
+      </div>
+    </div>
+
+    <nav class="nav" aria-label="课程章节">
+      <span class="nav-label">CONTENTS</span>
+      <a class="nav-item active" href="#sec-intro" data-section="sec-intro" aria-current="page">
+        <span class="num">01</span>
+        <span><b>课程简介</b><small>课程定位与主要内容</small></span>
+      </a>
+      <a class="nav-item" href="#sec-prepare" data-section="sec-prepare">
+        <span class="num">02</span>
+        <span><b>学员准备</b><small>报名前必须完成的准备</small></span>
+      </a>
+      <a class="nav-item" href="#sec-organizer" data-section="sec-organizer">
+        <span class="num">03</span>
+        <span><b>组织者的准备工作</b><small>开课前的 6 项检查</small></span>
+      </a>
+    </nav>
+
+    <div class="side-foot">
+      <span>通用 AI 动手实操课升级版</span>
+      <span>课程介绍 · 2026</span>
+    </div>
+  </aside>
+
+  <main class="main">
+    <div class="topline">
+      <div class="crumb"><span>课程介绍</span><i>/</i><b id="crumb">一、课程简介</b></div>
+      <div class="progress"><span id="pageNo">01</span><i>/</i><span>03</span></div>
+    </div>
+
+    <div class="page">
+      <section class="panel active" id="sec-intro" data-title="一、课程简介" data-short="课程简介">
+        <header class="sec-head">
+          <span class="eyebrow">SECTION 01</span>
+          <h2>一、课程简介</h2>
+          <p class="lead">一门从“会用 AI”走向“用 AI 做出生产力工具”的实操课。</p>
+        </header>
+
+        <div class="intro-grid">
+          <div class="intro-copy">
+            <p class="doc">《通用AI动手实操课》是华为算力先遣队潘少钦等同事利用业余时间开发的课程，系统介绍使用全球最佳的AI工具，和华为工作的实际需求结合，大量动手实操，系统性锻炼AI时代需要的实用技能。目前这门课程的自发学习学员超4万人，是2026年上半年华为iLearning上最爆款的课程之一。</p>
+            <p class="doc">本课程是此课程的升级版，主题是“从玩具到生产力工具”。</p>
+            <p class="mini-stats-label">前序课程数据</p>
+            <div class="mini-stats">
+              <div><b>46,146</b><span>学习人数</span></div>
+              <div><b>97.8</b><span>满意度</span></div>
+              <div><b>4h</b><span>设计时长</span></div>
+            </div>
+          </div>
+          <figure class="shot">
+            <img decoding="async" src="assets/8dc90193b7a7e70f.jpg" alt="前序课程在 iLearning 上的页面" width="640" height="1066">
+            <figcaption>前序课程《通用 AI 动手实操课》在 iLearning 上的页面</figcaption>
+          </figure>
+        </div>
+
+        <p class="label">主要的内容</p>
+        <div class="features">
+          <article class="feature">
+            <span class="fno">01</span>
+            <h3>AI Coding 进阶</h3>
+            <p>学员通过实操，深入掌握 AI Coding 的进阶技能，实现从开发简单、不可控、实用性不高的 AI Coding 玩具，到能完整掌握开发高水平实用应用软件开发的蜕变，基本达到当前软件本科毕业生应用软件的开发水准。</p>
+          </article>
+          <article class="feature">
+            <span class="fno">02</span>
+            <h3>通用办公 Agent</h3>
+            <p>熟练掌握以 WorkBuddy 为代表的通用办公 Agent，全面构建 AI 时代办公能力栈的全面重构。</p>
+          </article>
+          <article class="feature">
+            <span class="fno">03</span>
+            <h3>华为小龙虾</h3>
+            <p>玩转华为小龙虾，玩转 skill，玩转自动化任务，和华为 IT 系统集成，构建华为内部不可替代的生产力。</p>
+          </article>
+        </div>
+
+        <figure class="goal">
+          <img loading="lazy" decoding="async" src="assets/80636cc911077fde.jpg" alt="这次进阶课程的目标：从玩具到生产力工具" width="1600" height="899">
+        </figure>
+      </section>
+
+      <section class="panel" id="sec-prepare" data-title="二、学员准备" data-short="学员准备">
+        <header class="sec-head">
+          <span class="eyebrow">SECTION 02</span>
+          <h2>二、学员准备</h2>
+          <p class="lead">课程以实操为主，线下课程为全天；请至少提前三天完成课前准备。</p>
+        </header>
+
+        <div class="facts">
+          <div class="fact"><span>课程形式</span><b>全天线下实操</b></div>
+          <div class="fact"><span>课前准备</span><b>约 2 小时 · 建议提前 3 天</b></div>
+        </div>
+
+        <div class="must">
+          <div class="must-head">要参加线下课程，必须：</div>
+          <ol>
+            <li>完成课前准备工作（课前准备工作要 2 小时左右）。建议至少提前三天进行课程准备。没有完成课前准备工作，请勿参加线下课程。</li>
+            <li>参加线下课程，必须完整全程参与，不欢迎不接受不能全程参与的学员；</li>
+          </ol>
+        </div>
+
+        <h3 class="sub-title">学员需完成以下准备工作</h3>
+        <ol class="steps">
+          <li>
+            <span class="no">1</span>
+            <div><b>完成编程课准备</b><p>请按组织者提供的网址进行编程课准备。这个准备工作是为 AI Coding 准备环境，耗费时间长，准备工作多，请至少提前三天开启准备工作，有任何问题在群里及时求助。</p></div>
+          </li>
+          <li>
+            <span class="no">2</span>
+            <div><b>下载并注册 WorkBuddy</b><p>下载 WorkBuddy 最新版，并注册成功；</p></div>
+          </li>
+          <li>
+            <span class="no">3</span>
+            <div><b>升级 WeLink 与员工助手</b><p>把 WeLink 和员工助手升级到最新版本；</p></div>
+          </li>
+          <li>
+            <span class="no">4</span>
+            <div><b>准备设备与网络</b><p>编程课和 WorkBuddy 课程，强烈推荐使用个人电脑，并解决科学上网问题。华为小龙虾课程需使用办公电脑。</p></div>
+          </li>
+        </ol>
+      </section>
+
+      <section class="panel" id="sec-organizer" data-title="三、组织者的准备工作" data-short="组织者的准备工作">
+        <header class="sec-head">
+          <span class="eyebrow">SECTION 03</span>
+          <h2>三、组织者的准备工作</h2>
+          <p class="lead">建议学员规模控制在 30 人左右，并确保每位学员全程参与。</p>
+        </header>
+
+        <ul class="checks">
+          <li>完成学员报名工作，建议学员规模控制在 30 人左右；学员必须全程参加，不能全程参加不接受报名；</li>
+          <li>学员报名完成后，组建一个包括学员和老师的 WeLink 群和微信群；</li>
+          <li>做好学员的通知，督促大家做好相关准备工作，有问题及时在群里反馈；</li>
+          <li>预定好教室，教室布置为团组型，桌子上必须有电源接线板，确保每人有电源接口；</li>
+          <li>请准备多一些币（300-400 个），用于发放课堂奖励；</li>
+          <li>提醒学员提前办理员工助手的外网模型权限（需部门审批，参考 <a href="https://3ms.huawei.com/km/groups/3958925/blogs/details/22559819" target="_blank" rel="noopener">3ms 配置说明</a>），否则小龙虾模块无法开展。</li>
+        </ul>
+      </section>
+
+      <footer class="page-foot">
+        <button class="pager" id="prevBtn" type="button">已是第一节</button>
+        <span class="page-count" id="pageCount">01 / 03</span>
+        <button class="pager" id="nextBtn" type="button">学员准备 →</button>
+      </footer>
+      <p class="page-note">通用 AI 动手实操课升级版 · 课程介绍</p>
+    </div>
+  </main>
+</div>
+
+<script>
+(function(){
+  var panels = Array.prototype.slice.call(document.querySelectorAll('.panel'));
+  var navItems = Array.prototype.slice.call(document.querySelectorAll('.nav-item'));
+  var crumb = document.getElementById('crumb');
+  var pageNo = document.getElementById('pageNo');
+  var pageCount = document.getElementById('pageCount');
+  var prevBtn = document.getElementById('prevBtn');
+  var nextBtn = document.getElementById('nextBtn');
+  var idx = 0;
+
+  function pad(n){ return (n < 10 ? '0' : '') + n; }
+
+  function show(i){
+    idx = Math.max(0, Math.min(panels.length - 1, i));
+    panels.forEach(function(p, j){
+      p.classList.toggle('active', j === idx);
+    });
+    navItems.forEach(function(a, j){
+      var on = j === idx;
+      a.classList.toggle('active', on);
+      if(on){ a.setAttribute('aria-current', 'page'); } else { a.removeAttribute('aria-current'); }
+    });
+    crumb.textContent = panels[idx].getAttribute('data-title');
+    pageNo.textContent = pad(idx + 1);
+    pageCount.textContent = pad(idx + 1) + ' / ' + pad(panels.length);
+
+    prevBtn.disabled = idx === 0;
+    nextBtn.disabled = idx === panels.length - 1;
+    prevBtn.textContent = idx === 0 ? '已是第一节' : '← ' + panels[idx - 1].getAttribute('data-short');
+    nextBtn.textContent = idx === panels.length - 1 ? '已是最后一节' : panels[idx + 1].getAttribute('data-short') + ' →';
+
+    window.scrollTo(0, 0);
+  }
+
+  navItems.forEach(function(a, i){
+    a.addEventListener('click', function(e){
+      e.preventDefault();
+      show(i);
+    });
+  });
+  prevBtn.addEventListener('click', function(){ show(idx - 1); });
+  nextBtn.addEventListener('click', function(){ show(idx + 1); });
+
+  show(0);
+})();
+</script>
+</body>
+</html>

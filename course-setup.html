@@ -1,0 +1,508 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>《通用 AI 动手实操课》——课前环境准备</title>
+<style>
+:root{color-scheme:light;
+  --ink:#1c2333;--sub:#5a6478;--line:#e4e8ef;--accent:#2563eb;--accent-soft:#eef4ff;
+  --warn-bg:#fff7ed;--warn-line:#fdba74;--warn-ink:#9a3412;
+  --ok:#16a34a;--card:#ffffff;--bg:#f4f6f9;}
+*{box-sizing:border-box}
+html{scroll-behavior:auto}
+body{margin:0;background:var(--bg);color:var(--ink);
+  font:18px/1.85 -apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Hiragino Sans GB","Microsoft YaHei",sans-serif;}
+.wrap{max-width:1310px;margin:0 auto;padding:22px 20px 60px;}
+a{color:var(--accent);}
+
+/* 头部 */
+.hero{background:linear-gradient(135deg,#1e3a8a,#2563eb);color:#fff;border-radius:16px;
+  padding:16px 30px 14px;margin-bottom:20px;}
+.hero h1{margin:0;font-size:27px;line-height:1.35;}
+.hero .hero-sub{margin:6px 0 0;font-size:16.5px;line-height:1.7;color:#dbe7ff;}
+.hero .hero-meta{margin:6px 0 0;font-size:13.5px;color:#c3d6ff;}
+.hero .hero-meta a{color:#fff;}
+
+/* 警示条 */
+.warn{display:flex;gap:12px;align-items:flex-start;background:var(--warn-bg);
+  border:1px solid var(--warn-line);border-radius:12px;padding:14px 18px;
+  color:var(--warn-ink);font-weight:700;margin-bottom:20px;font-size:17px;}
+.warn .wicon{font-size:20px;line-height:1.4;}
+
+/* 步骤卡片 */
+.step{background:var(--card);border:1px solid var(--line);border-radius:14px;
+  padding:26px 30px 30px;margin-bottom:24px;box-shadow:0 1px 2px rgba(16,24,40,.04);
+  scroll-margin-top:72px;border-left:4px solid transparent;}
+.step-head{display:flex;align-items:center;gap:10px;margin-bottom:14px;flex-wrap:wrap;}
+.badge{background:var(--accent);color:#fff;font-weight:700;font-size:19px;
+  padding:7px 18px;border-radius:999px;letter-spacing:.5px;white-space:nowrap;}
+.badge.wide{min-width:14em;text-align:center;}
+details.subtab{border:1px solid var(--line);border-radius:10px;margin:12px 0;background:#fbfcfe;}
+details.subtab>summary{cursor:pointer;font-weight:700;font-size:16px;color:var(--accent);
+  padding:10px 16px;list-style:none;user-select:none;}
+details.subtab>summary::-webkit-details-marker{display:none;}
+details.subtab>summary::before{content:'▸ ';color:var(--accent);}
+details.subtab[open]>summary::before{content:'▾ ';}
+details.subtab .subtag{font-weight:400;font-size:13px;color:var(--sub);margin-left:6px;}
+details.subtab .subtab-body{padding:2px 16px 12px;}
+details.subtab .prompt{margin:10px 0 4px;}
+.step-title{font-weight:700;font-size:15px;color:var(--sub);}
+.tool-tag{background:#eef2f7;color:#42506a;font-size:13px;font-weight:600;
+  border:1px solid var(--line);border-radius:999px;padding:3px 12px;white-space:nowrap;}
+.instr{margin:18px 0 22px;color:var(--ink);}
+.instr .ico{margin-right:4px;}
+.route{font-weight:700;font-size:17px;color:#1e3a8a;background:var(--accent-soft);
+  border-radius:8px;padding:6px 12px;margin:20px 0 12px;display:inline-block;}
+.substeps{margin:14px 0 20px;padding-left:22px;}
+.substeps li{margin:22px 0;line-height:1.9;}
+.substeps li:first-child{margin-top:12px;}
+.substeps li:last-child{margin-bottom:12px;}
+.substeps p{margin:16px 0;}
+.substeps.circ{list-style:none;padding-left:4px;}
+.timing{display:inline-block;background:#f1f5f9;border:1px solid var(--line);border-radius:999px;
+  padding:2px 13px;font-size:13.5px;font-weight:600;color:#42506a;margin:4px 8px 4px 0;}
+.waithint{font-size:13.5px;color:var(--sub);}
+
+/* 提示词块 */
+.prompt{position:relative;background:var(--accent-soft);border:1px solid #d8e4fb;
+  border-left:4px solid var(--accent);border-radius:10px;padding:14px 48px 14px 18px;margin:26px 0;}
+.plabel{font-size:13.5px;font-weight:700;color:#1e3a8a;margin:16px 0 -6px;}
+.ptext{white-space:pre-wrap;font-size:15px;line-height:1.7;color:#1e3a5f;word-break:break-word;
+  max-height:13.6em;overflow-y:auto;padding-right:4px;scrollbar-width:thin;}
+.ptext::-webkit-scrollbar{width:8px;}
+.ptext::-webkit-scrollbar-thumb{background:#c3d4f5;border-radius:8px;}
+.ptext::-webkit-scrollbar-thumb:hover{background:var(--accent);}
+.copy{position:absolute;top:10px;right:10px;border:1px solid #c3d4f5;background:#fff;
+  color:var(--accent);border-radius:8px;font-size:12.5px;padding:4px 10px;cursor:pointer;transition:.15s;}
+.copy:hover{background:var(--accent);color:#fff;}
+.copy.copied{background:var(--ok);border-color:var(--ok);color:#fff;}
+
+/* 知识点卡片 */
+.know{background:linear-gradient(135deg,#f0f9ff,#ecfdf5);border:1px solid #bae6fd;
+  border-left:4px solid #0ea5e9;border-radius:12px;padding:16px 20px;margin:28px 0 14px;}
+.know .kbadge{display:inline-block;background:#0ea5e9;color:#fff;font-size:12.5px;font-weight:700;
+  padding:2px 11px;border-radius:999px;margin-bottom:6px;letter-spacing:1px;}
+.know .ktext{color:#0c4a6e;font-size:17px;font-weight:600;}
+
+/* 完成预期 */
+.expect{background:#f0fdf4;border:1px solid #bbf7d0;border-left:4px solid var(--ok);
+  border-radius:10px;padding:14px 18px;margin:28px 0 12px;font-size:16.5px;}
+.expect .etitle{display:block;font-weight:700;color:#065f46;margin-bottom:2px;}
+.expect p{margin:4px 0;color:#14532d;}
+
+/* 链接按钮 */
+.head-cta{margin-left:auto;}
+.btnlink{display:inline-block;border:1px solid #c3d4f5;background:#fff;color:var(--accent);
+  border-radius:8px;font-size:14px;font-weight:600;padding:6px 14px;text-decoration:none;}
+.btnlink:hover{background:var(--accent);color:#fff;}
+.btnlink.primary{background:var(--accent);color:#fff;border-color:var(--accent);}
+
+/* 示意图 */
+.fig{margin:20px 0 10px;}
+.shots{display:flex;flex-direction:column;align-items:flex-start;gap:22px;margin-top:10px;}
+.shot-btn{border:1px solid var(--line);background:#fff;border-radius:10px;padding:6px;cursor:zoom-in;
+  width:744px;max-width:100%;}
+.shot-btn:hover{border-color:var(--accent);}
+.shot{display:block;width:100%;max-width:100%;height:auto;border-radius:7px;}
+.menu-cap{font-size:12.5px;color:var(--sub);margin-top:8px;}
+
+/* 常见问题 */
+.faq{margin:30px 0 8px;}
+.faq>strong{display:block;font-size:17px;margin-bottom:10px;}
+.faq-item{border-left:3px solid #c3d4f5;padding:6px 0 6px 16px;margin:20px 0;}
+.faq-item .q{font-weight:700;margin-bottom:4px;}
+.faq-item .a{color:var(--sub);font-size:16.5px;line-height:1.85;}
+
+.faq-item .a .prompt{margin:14px 0 4px;}
+
+/* 帮助两栏 */
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:2px 28px;}
+.grid2 details,.step details.tip{font-size:15px;}
+.grid2 summary,.step summary{cursor:pointer;font-weight:600;font-size:15.5px;color:var(--ink);}
+.grid2 details p,.step details.tip p{font-size:15px;color:var(--sub);margin:8px 0 4px;}
+.grid2 details li{font-size:15px;color:var(--sub);}
+
+/* 结尾 */
+.final{background:linear-gradient(135deg,#ecfdf5,#f0fdf4);border:1px solid #a7f3d0;
+  border-radius:14px;padding:18px 22px;font-weight:700;color:#065f46;font-size:18px;
+  display:flex;gap:10px;align-items:flex-start;margin-bottom:20px;}
+.summary{background:var(--card);border:1px solid var(--line);border-radius:14px;
+  padding:16px 22px;margin-bottom:20px;font-size:16px;color:var(--sub);}
+.summary strong{color:var(--ink);}
+footer{font-size:12.5px;color:var(--sub);text-align:center;line-height:1.9;}
+
+/* 截图灯箱 */
+.lightbox{position:fixed;inset:0;background:rgba(15,23,42,.92);display:none;z-index:90;padding:44px 22px 22px;}
+.lightbox.open{display:block;}
+.lightbox img{display:block;max-width:100%;max-height:86vh;height:auto;margin:auto;background:#fff;border-radius:8px;}
+.lb-close{position:absolute;top:12px;right:16px;border:1px solid rgba(255,255,255,.35);background:transparent;
+  color:#fff;border-radius:8px;font-size:15px;padding:6px 14px;cursor:pointer;}
+.lb-close:hover{background:rgba(255,255,255,.15);}
+
+/* 左侧目录 */
+.toc-toggle{position:fixed;left:14px;top:14px;z-index:70;background:#409eff;color:#fff;
+  border:none;border-radius:10px;padding:9px 14px;font-size:17px;cursor:pointer;
+  box-shadow:0 4px 14px rgba(64,158,255,.4);display:none;}
+.toc{position:fixed;left:0;top:0;bottom:0;width:278px;
+  background:linear-gradient(180deg,#1a2332 0%,#2d3a4f 100%);color:#fff;
+  box-shadow:6px 0 20px rgba(16,24,40,.18);
+  padding:14px 0 20px;transform:translateX(-100%);transition:transform .25s;z-index:60;overflow-y:auto;}
+.toc::-webkit-scrollbar{width:6px;}
+.toc::-webkit-scrollbar-thumb{background:rgba(255,255,255,.2);border-radius:3px;}
+.toc-head{font-weight:600;font-size:17px;color:#fff;padding:10px 18px 12px;
+  letter-spacing:.5px;border-bottom:1px solid rgba(255,255,255,.1);margin-bottom:8px;
+  display:flex;justify-content:space-between;align-items:center;}
+.toc-close{background:none;border:none;font-size:15px;color:rgba(255,255,255,.6);cursor:pointer;padding:4px 6px;border-radius:6px;}
+.toc-close:hover{background:rgba(255,255,255,.1);color:#fff;}
+.toc a{display:block;padding:11px 16px 11px 18px;color:rgba(255,255,255,.72);text-decoration:none;
+  font-size:14.5px;border-left:3px solid transparent;line-height:1.5;transition:all .2s ease;}
+.toc a:hover{color:#fff;background:rgba(255,255,255,.05);}
+.toc a.active{color:#fff;background:rgba(64,158,255,.15);border-left-color:#409eff;font-weight:600;}
+body.toc-open .toc{transform:none;}
+body.toc-open .toc-toggle{display:none;}
+body:not(.toc-open) .toc-toggle{display:block;}
+@media (min-width:1024px){
+  body.toc-open .wrap{margin:0 30px 0 304px;}
+}
+@media (max-width:1023.9px){
+  body.toc-open .wrap{margin:0 auto;}
+}
+@media (max-width:640px){
+  .hero{padding:14px 20px;}
+  .hero h1{font-size:22px;}
+  .step{padding:18px 16px;}
+  .prompt{padding-right:14px;}
+  .copy{position:static;margin-bottom:8px;display:inline-block;}
+  .toc{width:270px;}
+  body{font-size:16px;}
+  .badge{font-size:17px;}
+  .step-title{font-size:14px;}
+  .grid2{grid-template-columns:1fr;}
+  .shot{max-width:100%;}
+}
+@media print{
+  body{background:#fff;}
+  .copy,.toc,.toc-toggle,.lightbox{display:none !important;}
+  body.toc-open .wrap{margin:0 auto;}
+  .step{break-inside:avoid;box-shadow:none;opacity:1;}
+  .hero{border-radius:0;}
+  .fig{display:none;}
+}
+
+.topbar{position:sticky;top:0;z-index:90;background:rgba(255,255,255,.95);
+  -webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);
+  border-bottom:1px solid #e4e8ef;box-shadow:0 2px 12px rgba(16,24,40,.06);}
+.topbar-in{max-width:1310px;margin:0 auto;padding:9px 20px;display:flex;align-items:center;gap:16px;flex-wrap:wrap;}
+.brand{font-weight:800;font-size:17.5px;color:#1e3a8a;letter-spacing:.2px;}
+.sitenav{display:flex;gap:4px;margin-left:auto;flex-wrap:wrap;}
+.sitenav a{padding:6px 14px;border-radius:999px;text-decoration:none;color:#5a6478;font-size:14.5px;font-weight:600;}
+.sitenav a:hover{background:#eef4ff;color:#2563eb;}
+.sitenav a.active{background:#1e3a8a;color:#fff;}
+.step{scroll-margin-top:110px;}
+.toc{top:var(--barh,62px);}
+.pc-item{background:#f8fafc;border:1px solid #e4e8ef;border-left:4px solid #93c5fd;border-radius:12px;padding:16px 20px;margin:14px 0;}
+.pc-item h4{margin:0 0 8px;font-size:17px;color:#1e3a8a;}
+.pc-item p{margin:6px 0;font-size:15.5px;line-height:1.8;color:#3f4a5f;}
+.pc-item b{color:#1c2333;}
+.bios-shots{display:flex;gap:16px;flex-wrap:wrap;margin:12px 0 2px;}
+.bios-shots figure{flex:1 1 320px;margin:0;background:#fff;border:1px solid #e4e8ef;border-radius:12px;padding:10px;scroll-margin-top:120px;}
+.bios-shots img{display:block;width:100%;height:auto;border-radius:8px;}
+.bios-shots figcaption{font-size:13px;color:#5a6478;text-align:center;margin-top:8px;}
+@media (min-width:1024px){
+  .toc{transform:none !important;}
+  .toc-toggle{display:none !important;}
+  .toc-close{display:none !important;}
+  body .wrap{margin:0 30px 0 304px !important;}
+}
+.prep-title{font-size:26px;margin:4px 0 14px;color:#1e3a8a;letter-spacing:.5px;}
+@media (max-width:860px){.os-grid{grid-template-columns:1fr;}}
+</style>
+<style>
+.console-shot{margin:12px 0;background:#fff;border:1px solid #e4e8ef;border-radius:12px;padding:10px;max-width:660px;}
+.console-shot img{display:block;width:100%;height:auto;border-radius:8px;}
+.console-shot figcaption{font-size:13px;color:#5a6478;text-align:center;margin-top:8px;}
+.summary p{margin:6px 0;}
+</style>
+<link rel="stylesheet" href="assets/course-theme.css">
+</head>
+<body class="course-setup">
+<div class="topbar">
+  <div class="topbar-in">
+    <span class="brand">《通用 AI 动手实操课》——课前环境准备</span>
+  </div>
+</div>
+<script>document.documentElement.style.setProperty('--barh', document.querySelector('.topbar').offsetHeight + 'px');
+window.addEventListener('resize', function(){ document.documentElement.style.setProperty('--barh', document.querySelector('.topbar').offsetHeight + 'px'); });</script>
+<button class="toc-toggle" id="tocToggle" title="展开目录">☰ 目录</button>
+<nav class="toc" id="toc">
+  <div class="toc-head">目录<button class="toc-close" id="tocClose" title="收起目录">✕</button></div>
+  <a href="#step-pc">第 1 步 · 准备电脑与操作系统</a>
+  <a href="#step-e01">第 2 步 · 安装开发工具TRAE</a>
+  <a href="#step-e02">第 3 步 · 用 TRAE 完成编程环境准备</a>
+  <a href="#step-e03">第 4 步 · 环境再次确认</a>
+</nav>
+<div class="wrap">
+
+
+
+<div class="summary">
+  <p><span class="ico">🎯</span> <strong>强调！如果没有办法完成课前环境准备，无法进行授课。强烈建议至少提前三天准备，可以一边办公一边准备。（课前准备工作要2小时左右）</strong></p>
+  <p><strong>本操作共 4 步</strong>：第 1 步准备电脑与操作系统；第 2 步安装开发工具TRAE；第 3 步用 TRAE 完成编程环境准备；第 4 步汇总确认环境准备情况。</p>
+</div>
+
+
+
+<section class="step" id="step-pc">
+  <div class="step-head"><span class="badge">第 1 步 · 准备电脑与操作系统</span></div>
+  <p class="instr"><span class="ico">🎯</span>先自查这一节。这一节不过关，后面的安装大概率会失败，而且很难救。</p>
+
+  <div class="pc-item">
+    <h4>① 电脑硬件</h4>
+    <p><b>强烈建议使用个人 Windows 电脑。系统盘（通常是C盘）至少 2G 容量，非系统盘剩余 20G 容量；剩余内存 ≥ 6G</b>；整台电脑只有一个分区时，至少 30G。</p>
+  </div>
+
+  <div class="pc-item">
+    <h4>② 操作系统</h4>
+    <p>优先 Windows 11。Windows 10 也可用，但必须是 <b>1903 版 / 内部版本 18362 以上</b>（<b>Win+R</b> 输入 <b>winver</b> 查看）；低于该版本无法满足课程环境要求。</p>
+    <p>阉割版 / 精简版 Windows 会出现各种不可控问题，建议直接重装完整版。</p>
+    <p>如何在一台电脑上安装 Windows 10/11 的完整版本，请参考<a href="https://chat.deepseek.com/share/5gb87osfbyg9hhsb72" target="_blank" rel="noopener">这份安装说明</a>。</p>
+
+  </div>
+
+  <div class="pc-item">
+    <h4>③ BIOS 虚拟化（如需）</h4>
+    <p>进 BIOS / UEFI 打开 <a href="#bios-intel">Intel VT-x</a> 或 <a href="#bios-amd">AMD-V / SVM Mode</a>。</p>
+    <p>在 Windows 的命令行窗口，用下面的命令查看虚拟化是否已开启：<br><b>systeminfo | findstr "虚拟化"</b>（见下图）</p>
+    <figure class="console-shot"><img loading="lazy" decoding="async" src="assets/15147489113192b5.png" alt="systeminfo 查看虚拟化是否开启" width="547" height="109"><figcaption>以输出末尾“Hyper-V 要求”几项是否全为“是”为准；也可在任务管理器 → 性能 → CPU 里看“虚拟化：已启用”</figcaption></figure>
+    <p>没打开的话，会在装环境时卡住，对照下面两张图操作。不同厂家电脑进入BIOS设置的方式不同，请咨询 DeepSeek、豆包等 AI 工具。</p>
+    <div class="bios-shots">
+      <figure id="bios-intel"><img loading="lazy" decoding="async" src="assets/64dc2117f96fd408.jpg" alt="Intel 平台开启 VT-x" width="1100" height="618"><figcaption>Intel 平台：开启 VT-x</figcaption></figure>
+      <figure id="bios-amd"><img loading="lazy" decoding="async" src="assets/1eca77e9cb059fb9.jpg" alt="AMD 平台开启 SVM Mode" width="1100" height="618"><figcaption>AMD 平台：开启 SVM Mode</figcaption></figure>
+    </div>
+  </div>
+
+  <div class="pc-item">
+    <h4>④ 网络与账号</h4>
+    <p>公司网络环境下，请在 <b>Huawei-Guest</b> 网络下操作，并断开 <b>xGate</b> 代理连接。</p>
+    <p>编程课需要 <b>Google 或 GPT 账号</b>，能科学上网并使用 Canvas；私人电脑要自己解决科学上网问题。办公电脑可用本环境大部分功能，但复杂上云操作因公司安全原因无法上传。</p>
+  </div>
+
+</section><section class="step" id="step-e01">
+  <div class="step-head"><span class="badge wide">第 2 步 · 安装开发工具TRAE</span>
+    <a class="btnlink head-cta" href="https://www.trae.cn/events/code-fission/V2A6AS5E44PZ?utm_source=copy_link&utm_medium=code_fission" target="_blank" rel="noreferrer noopener">下载 TRAE</a></div>
+  <p class="instr"><span class="ico">🎯</span>下载安装 TRAE，完成登录与界面设置，选工作目录。</p>
+  <p><span class="timing">预计 10–20 分钟</span></p>
+
+  <ol class="substeps">
+    <li>下载 TRAE 安装软件包。链接：<a href="https://www.trae.cn/" target="_blank" rel="noreferrer noopener">https://www.trae.cn/</a>（在 Huawei-Guest 网络下操作，断开 xGate 代理连接）
+      <div class="fig"><div class="shots">
+        <button class="shot-btn"><img decoding="async" class="shot" src="assets/7f86374388016ab1.png" alt="下载 TRAE 安装包" loading="lazy" width="1667" height="1026"></button>
+      </div></div></li>
+    <li>安装 TRAE 软件。优先选择“自定义安装”，创建并选择非系统盘（如 <code>D:\TRAE_CN</code>）。
+      <div class="fig"><div class="shots">
+        <button class="shot-btn"><img decoding="async" class="shot" src="assets/d3e8e72ad07731bc.png" alt="运行安装程序" loading="lazy" width="1674" height="436"></button>
+        <button class="shot-btn"><img decoding="async" class="shot" src="assets/16103d6dc4c63f80.png" alt="自定义安装目录" loading="lazy" width="598" height="464"></button>
+        <button class="shot-btn"><img decoding="async" class="shot" src="assets/3ce8c60ab7ae18fb.png" alt="正在安装" loading="lazy" width="598" height="464"></button>
+      </div></div></li>
+    <li>点右上角的“Agent”，进入工作台模式（有可能每次启动都需要点一下）。
+      <div class="fig"><div class="shots">
+        <button class="shot-btn"><img decoding="async" class="shot" src="assets/f25ac00934a5e012.png" alt="进入 Agent 工作台" loading="lazy" width="1919" height="1028"></button>
+      </div></div></li>
+    <li>登录 TRAE（在 Huawei-Guest 网络下操作，断开 xGate 代理连接）。
+      <div class="fig"><div class="shots">
+        <button class="shot-btn"><img decoding="async" class="shot" src="assets/9b57012296752995.png" alt="登录 TRAE" loading="lazy" width="1919" height="1031"></button>
+      </div></div></li>
+    <li>选择“亮色”皮肤，告别黑暗色。
+      <div class="fig"><div class="shots">
+        <button class="shot-btn"><img decoding="async" class="shot" src="assets/86f315f7b7692e3b.png" alt="切换亮色皮肤" loading="lazy" width="1919" height="1035"></button>
+      </div></div></li>
+    <li>认识 3 个 TRAE 的常见操作：<br>在图中① 中输入文字/图片，和 AI 对话；<br>在图中② 选择模型（建议glm5.2或deepseek-v4.1-flash），需考虑是否有图片理解能力； <br>在图中③ 选择本地的工作文件夹。
+      <div class="fig"><div class="shots">
+        <button class="shot-btn"><img decoding="async" class="shot" src="assets/d41cc4388b15bf56.png" alt="TRAE 的三个交互选项" loading="lazy" width="1919" height="1027"></button>
+      </div></div></li>
+  </ol>
+
+  <div class="expect"><span class="etitle">✅ 完成后</span>
+    <p>TRAE 已打开并登录。</p></div>
+
+  <div class="faq"><strong>常见的问题和操作</strong>
+    <div class="faq-item"><div class="q">使用 TRAE 是否需要充值？</div>
+      <div class="a">新用户首次注册赠送了 4500 积分，不够之后再充值。</div></div>
+    <div class="faq-item"><div class="q">遇到模型不响应/输出怎么办？</div>
+      <div class="a">大概率是网络环境的问题，尝试重启 TRAE，检查接入的网络和代理。</div></div>
+    <div class="faq-item"><div class="q">运行审批是否有风险？</div>
+      <div class="a">TRAE 在项目的文件空间里工作时，基本上直接点“运行”允许即可。有些任务有多次运行，容易忽略导致等待时间过长，需要多关注 TRAE 的运行授权请求（有声音提醒）。</div></div>
+    <div class="faq-item"><div class="q">为什么 TRAE 让我接管浏览器？</div>
+      <div class="a">TRAE 内置了浏览器会进行一些自动化网页操作，但是需要登录/密码等场景时，需要人工接管操作，输完密码后在对话框告诉 TRAE 已完成，让它继续操作。</div></div>    
+    <div class="faq-item"><div class="q">如果遇到网络中断、不小心关了软件、电脑重启等情况，怎么办？</div>
+      <div class="a"> 先不要慌，在原来的和TRAE的对话里，输入“<strong>请继续</strong>”即可。</div></div>  
+  </div>
+
+
+</section>
+
+<section class="step" id="step-e02">
+  <div class="step-head"><span class="badge wide">第 3 步 · 用 TRAE 完成编程环境准备</span></div>
+  <p class="instr"><span class="ico">🎯</span>软件在后台自动下载安装与检查，AI 并行启动 GitHub、CloudBase 账号准备，最后汇总。</p>
+  <div class="know">
+    <div class="ktext">TRAE 在安装镜像环境时，AI 会并行启动 GitHub 账号和腾讯云账号准备，配合AI录入相关信息即可。 <br>本环节可能1~3次重启电脑，注意随时保存其他正在工作的文件资料</div></div>
+  <p><span class="timing">预计 45–120 分钟；已有准备复用约 3–10 分钟</span></p>
+  <ol class="substeps">
+
+    <li>优先在非系统盘创建 ENV 目录（如 <code>D:\ENV</code>）；如果电脑只有 C 盘，则创建 <code>C:\ENV</code>。选择 ENV 作为工作目录。
+      <div class="fig"><div class="shots">
+        <button class="shot-btn"><img decoding="async" class="shot" src="assets/9112190d84909c78.png" alt="选择本地工作文件夹" loading="lazy" width="983" height="685"></button>
+     </div></div></li>  
+   
+    <li>在聊天框发送下方提示；需要选择模式时，选 Agent（智能体）。</li>
+    
+    <li>软件会在后台自动下载安装；AI 并行启动 GitHub、CloudBase 账号准备。需要本人授权或确认时 TRAE 会提醒。<br>如需重启，注意先保存其他工作文件等资料，重启后再回到原任务发“继续执行”提示词给 TRAE 恢复执行。</li>
+  </ol>
+  <div class="prompt"><button class="copy" onclick="copyPrompt(this)">复制</button>
+
+    <div class="ptext">请按照以下环境准备说明获取并校验工具包、安装技能，然后调用 ai-coding-env 技能完成环境准备。已有工具、账号和授权直接复用，不创建业务工程：
+https://siatwangmin.github.io/aicoding-course/setup-guide.md</div></div>
+
+  <details class="subtab"><summary> 准备 GitHub 账号（默认自动开始，需配合注册）<span class="subtag">预计 5–10 分钟</span></summary>
+    <div class="subtab-body">
+      <p>按TRAE打开的页面完成本人登录或注册、邮箱验证，等TRAE确认账号准备好后继续。</p>
+      <p>如果未正常自动开始准备 GitHub，请复制如下提示词到 TRAE，并发送</p>
+      <div class="prompt"><button class="copy" onclick="copyPrompt(this)">复制</button>
+<div class="ptext">请调用 ai-coding-github 技能准备或检查我的 GitHub 免费账号、邮箱和命令行授权。已有账号直接复用；需要我操作时，一次告诉我一个动作。完成后返回环境准备流程，不创建仓库或发布作品。</div></div>
+    </div>
+  </details>
+
+  <details class="subtab"><summary>准备云服务 CloudBase （默认自动开始，需配合注册）<span class="subtag">预计 10–20 分钟</span></summary>
+    <div class="subtab-body">
+      <p>跟随 TRAE 打开的页面，本人完成登录或注册、实名和授权；已有账号直接用。需要本人确认时 TRAE 会提醒。</p>
+      <p class="plabel">如果未正常自动开始准备CloudBase，请复制如下提示词到 TRAE，并发送</p>
+      <div class="prompt"><button class="copy" onclick="copyPrompt(this)">复制</button>
+<div class="ptext">请调用 ai-coding-cloudbase 技能准备或检查我的腾讯云 CloudBase 账号、环境和管理授权。已有结果直接复用；需要我登录、实名、授权或决定费用时，一次告诉我一个动作。完成后返回环境准备流程，不创建业务表或部署作品。</div></div>
+    </div>
+  </details>
+
+<div class="expect"><span class="etitle">✅ 完成后</span>
+  <p> TRAE 的环境准备工作完成后，会输出准备报告，查看环境安装报告确认正常。成功示例如下图。</p></div>
+
+<div class="fig"><div class="shots">
+  <button class="shot-btn"><img decoding="async" class="shot" src="assets/795f9caf0e33702f.png" alt="环境安装报告" loading="lazy" width="769" height="707"></button>
+</div></div>
+  
+</section>
+
+<section class="step" id="step-e03">
+  <div class="step-head"><span class="badge wide"> 第 4 步 · 汇总确认环境准备结果</span></div>
+  <p class="instr"><span class="ico">🎯</span> 自动汇总编程环境、GitHub、CloudBase 账号等课前准备工作情况</p>
+  <p><span class="timing">预计 3–10 分钟</span></p>
+  <p>如果没有生成汇总报告，或 TRAE 输出的环境准备汇总中存在缺项时，复制下方提示词发送给 TRAE，继续执行。</p>
+  <div class="prompt"><button class="copy" onclick="copyPrompt(this)">复制</button>
+<div class="ptext">请调用 ai-coding-env 技能汇总环境准备结果：编程工具、腾讯云 CloudBase、GitHub 账号和必要授权。已有结果直接复用，缺项请继续处理；不能只验收编程工具就标记环境准备完成。请核对用户级技能位置与实际加载，说明已验证结果及仍需我操作的事项。</div></div>
+
+  <div class="expect"><span class="etitle">✅ 完成后</span>
+    <p>TRAE 逐项确认编程工具、GitHub、CloudBase 和必要授权的实际结果；有缺项时继续处理。</p></div>
+
+</section>
+
+
+<section class="step" id="step-help">
+  <div class="step-head"><span class="badge">Tips</span>
+    </div>
+      <div class="faq-item"><div class="q">如何卸载环境</div>
+      <div class="a">在 TRAE 中说“调用 ai-coding-env 卸载环境，保留我的作品”。也可双击当前执行资料里的“卸载环境.cmd”。先看清单再执行，作品默认保留；测试项目、云端和手机应用另按明确范围处理。</div>
+    </div>
+</section>
+
+<footer>
+</footer>
+
+</div>
+
+<div class="lightbox" id="lightbox" role="dialog" aria-label="放大的操作截图">
+  <button class="lb-close" id="lb-close">关闭 ✕</button>
+  <img id="lb-img" alt="放大的操作截图">
+</div>
+
+<script>
+var LS = 'prep_';
+function $(s, c){ return (c || document).querySelector(s); }
+function $all(s, c){ return Array.prototype.slice.call((c || document).querySelectorAll(s)); }
+function save(k, v){ try{ localStorage.setItem(LS + k, v); }catch(e){} }
+function load(k){ try{ return localStorage.getItem(LS + k); }catch(e){ return null; } }
+
+/* 复制提示词 */
+function fallbackCopy(text, ok){
+  var ta = document.createElement('textarea');
+  ta.value = text; ta.style.position = 'fixed'; ta.style.opacity = '0';
+  document.body.appendChild(ta); ta.select();
+  try{ document.execCommand('copy'); ok(); }catch(e){}
+  document.body.removeChild(ta);
+}
+function copyText(text, btn){
+  function ok(){
+    if(btn){
+      var t = btn.textContent;
+      btn.textContent = '已复制 ✓'; btn.classList.add('copied');
+      setTimeout(function(){ btn.textContent = t; btn.classList.remove('copied'); }, 1600);
+    }
+  }
+  if(navigator.clipboard && navigator.clipboard.writeText){
+    navigator.clipboard.writeText(text).then(ok, function(){ fallbackCopy(text, ok); });
+  } else { fallbackCopy(text, ok); }
+}
+function copyPrompt(btn){ copyText(btn.closest('.prompt').querySelector('.ptext').innerText.trim(), btn); }
+
+/* 截图灯箱 */
+(function(){
+  var box = $('#lightbox'), img = $('#lb-img');
+  $all('.shot-btn').forEach(function(b){
+    b.addEventListener('click', function(){
+      img.src = b.querySelector('img').src;
+      img.alt = b.querySelector('img') ? b.querySelector('img').alt : '操作截图';
+      box.classList.add('open');
+    });
+  });
+  function close(){ box.classList.remove('open'); img.src = ''; }
+  $('#lb-close').addEventListener('click', close);
+  box.addEventListener('click', function(e){ if(e.target === box) close(); });
+  document.addEventListener('keydown', function(e){ if(e.key === 'Escape') close(); });
+})();
+
+/* 左侧目录 */
+(function(){
+  var body = document.body;
+  var saved = load('toc');
+  var open = saved === null ? window.innerWidth >= 1024 : saved === '1';
+  function apply(o){ body.classList.toggle('toc-open', o); save('toc', o ? '1' : '0'); }
+  apply(open);
+  $('#tocToggle').addEventListener('click', function(){ apply(true); });
+  $('#tocClose').addEventListener('click', function(){ apply(false); });
+  var links = $all('#toc a');
+  var secs = links.map(function(a){ return document.getElementById(a.getAttribute('href').slice(1)); });
+  function spy(){
+    var y = window.scrollY + 140, i = 0;
+    secs.forEach(function(s, idx){ if(s && s.offsetTop <= y) i = idx; });
+    links.forEach(function(a, idx){ a.classList.toggle('active', idx === i); });
+  }
+  window.addEventListener('scroll', spy, {passive:true});
+  window.addEventListener('resize', spy);
+  spy();
+})();
+</script>
+<script>
+(function(){
+  function fix(){
+    if(!location.hash) return;
+    var el = document.getElementById(location.hash.slice(1));
+    if(!el) return;
+    document.documentElement.style.scrollBehavior = 'auto';
+    var bar = document.querySelector('.topbar');
+    var y = el.getBoundingClientRect().top + window.pageYOffset - ((bar ? bar.offsetHeight : 0) + 16);
+    window.scrollTo(0, Math.max(0, y));
+  }
+  if(document.readyState === 'complete'){ fix(); }
+  window.addEventListener('load', fix);
+})();
+</script>
+</body>
+</html>
