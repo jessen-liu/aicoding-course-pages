@@ -192,20 +192,25 @@ button{font-family:inherit}
   a{color:inherit}
 }
 </style>
-<link rel="stylesheet" href="assets/course-theme.css">
+<link rel="stylesheet" href="assets/course-theme.css?v=2">
 </head>
 <body class="course-overview">
 
-<div class="layout">
-  <aside class="sidebar">
-    <div class="side-brand">
-      <span class="logo" aria-hidden="true">AI</span>
-      <div>
-        <h1 class="side-title">通用 AI 动手实操课<span class="ver">升级版</span></h1>
-        <p class="side-kicker">课程介绍 · 从玩具到生产力工具</p>
+<header class="topbar course-banner">
+  <div class="topbar-in">
+    <div class="brand-lockup">
+      <span class="brand-mark" aria-hidden="true">AI</span>
+      <div class="brand-txt">
+        <h1 class="brand">通用 AI 动手实操课<span class="brand-ver">升级版</span></h1>
+        <p class="brand-sub">从玩具到生产力工具</p>
       </div>
     </div>
+    <nav class="course-links" aria-label="课程页面"><a href="course-overview.html" class="current" aria-current="page">课程介绍</a><a href="course-setup.html">编程课前准备</a><a href="course-handbook.html">课堂手册</a></nav>
+  </div>
+</header>
 
+<div class="layout">
+  <aside class="sidebar">
     <nav class="nav" aria-label="课程章节">
       <span class="nav-label">CONTENTS</span>
       <a class="nav-item active" href="#sec-intro" data-section="sec-intro" aria-current="page">
@@ -396,6 +401,15 @@ button{font-family:inherit}
   nextBtn.addEventListener('click', function(){ show(idx + 1); });
 
   show(0);
+})();
+</script>
+<script>
+(function(){
+  var banner=document.querySelector('.course-banner');
+  function measure(){document.documentElement.style.setProperty('--barh',banner.offsetHeight+'px');}
+  measure();
+  if(window.ResizeObserver){new ResizeObserver(measure).observe(banner);}
+  else{window.addEventListener('resize',measure);}
 })();
 </script>
 </body>

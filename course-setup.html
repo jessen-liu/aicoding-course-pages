@@ -224,14 +224,21 @@ body:not(.toc-open) .toc-toggle{display:block;}
 .console-shot figcaption{font-size:13px;color:#5a6478;text-align:center;margin-top:8px;}
 .summary p{margin:6px 0;}
 </style>
-<link rel="stylesheet" href="assets/course-theme.css">
+<link rel="stylesheet" href="assets/course-theme.css?v=2">
 </head>
 <body class="course-setup">
-<div class="topbar">
+<header class="topbar course-banner">
   <div class="topbar-in">
-    <span class="brand">《通用 AI 动手实操课》——课前环境准备</span>
+    <div class="brand-lockup">
+      <span class="brand-mark" aria-hidden="true">AI</span>
+      <div class="brand-txt">
+        <h1 class="brand">通用 AI 动手实操课<span class="brand-ver">升级版</span></h1>
+        <p class="brand-sub">从玩具到生产力工具</p>
+      </div>
+    </div>
+    <nav class="course-links" aria-label="课程页面"><a href="course-overview.html">课程介绍</a><a href="course-setup.html" class="current" aria-current="page">编程课前准备</a><a href="course-handbook.html">课堂手册</a></nav>
   </div>
-</div>
+</header>
 <script>document.documentElement.style.setProperty('--barh', document.querySelector('.topbar').offsetHeight + 'px');
 window.addEventListener('resize', function(){ document.documentElement.style.setProperty('--barh', document.querySelector('.topbar').offsetHeight + 'px'); });</script>
 <button class="toc-toggle" id="tocToggle" title="展开目录">☰ 目录</button>
@@ -502,6 +509,15 @@ function copyPrompt(btn){ copyText(btn.closest('.prompt').querySelector('.ptext'
   }
   if(document.readyState === 'complete'){ fix(); }
   window.addEventListener('load', fix);
+})();
+</script>
+<script>
+(function(){
+  var banner=document.querySelector('.course-banner');
+  function measure(){document.documentElement.style.setProperty('--barh',banner.offsetHeight+'px');}
+  measure();
+  if(window.ResizeObserver){new ResizeObserver(measure).observe(banner);}
+  else{window.addEventListener('resize',measure);}
 })();
 </script>
 </body>

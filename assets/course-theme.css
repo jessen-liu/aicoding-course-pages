@@ -184,3 +184,94 @@ img{max-width:100%}
  .layout{display:block!important}.page,.step{box-shadow:none;border:0;padding:0;max-width:none}
  .course-overview .panel{display:block!important}
 }
+
+/* Refined shared banner and comfortable desktop reading. */
+body{background:radial-gradient(ellipse at 100% 10%,#eef3ff 0,transparent 42%),var(--bg)}
+.course-banner{isolation:isolate;position:sticky;top:0;z-index:90;overflow:hidden;color:#fff;background:radial-gradient(ellipse at 78% -110%,#2d5c93 0,transparent 65%),linear-gradient(115deg,#101e38,#172e51 60%,#183655);border:0;box-shadow:0 5px 24px #0d20301a}
+.course-banner::before{content:"";position:absolute;z-index:-1;width:430px;height:430px;right:8%;top:-360px;border:1px solid #97c7ed24;border-radius:50%;box-shadow:0 0 0 54px #a3d9f006,0 0 0 108px #a3d9f004;pointer-events:none}
+.course-banner::after{content:"";position:absolute;bottom:0;left:0;right:0;height:2px;background:linear-gradient(90deg,#397bff,#79c7da 55%,#dcb77c 92%);pointer-events:none}
+.course-banner .topbar-in{box-sizing:border-box;position:relative;max-width:none;min-height:116px;margin:0;padding:24px 40px;display:flex;flex-wrap:nowrap;align-items:center;justify-content:space-between;gap:30px}
+.course-banner .brand-lockup{display:flex;align-items:center;gap:16px;min-width:0}
+.course-banner .brand-mark{width:52px;height:52px;flex:none;display:grid;place-items:center;border-radius:15px;color:#fff;font-size:18px;font-weight:850;letter-spacing:.02em;background:linear-gradient(140deg,#6b9bff,#356de8 55%,#2450b8);border:1px solid #c1d7ff55;box-shadow:inset 0 1px 0 #fff5,0 7px 22px #050f292b;transform:rotate(-4deg)}
+.course-banner .brand{display:flex;align-items:center;flex-wrap:wrap;gap:12px;margin:0;font-size:26px;line-height:1.4;font-weight:750;letter-spacing:.02em;color:#f5f8ff}
+.course-banner .brand-ver{margin:0;border:1px solid #e5c89c4d;border-radius:5px;padding:3px 8px;font-size:11px;line-height:1.5;color:#edd6b0;background:#f8d28a12;box-shadow:none;letter-spacing:.08em;white-space:nowrap}
+.course-banner .brand-sub{display:flex;align-items:center;gap:8px;margin:7px 0 0;font-size:13px;line-height:1.5;letter-spacing:.12em;color:#bdcce1}
+.course-banner .brand-sub::before{content:"";width:5px;height:5px;background:#e5c28b;border-radius:50%;box-shadow:0 0 0 3px #e5c28b12}
+.course-links{display:flex;align-items:center;gap:5px;padding:5px;border:1px solid #d5e4fa1f;background:#06162c26;border-radius:11px;flex:none}
+.course-links a{color:#c0cee1;font-size:14px;line-height:1.5;font-weight:550;text-decoration:none;white-space:nowrap;padding:10px 18px;border-radius:7px;transition:background .18s,color .18s}
+.course-links a:hover{background:#e0eaff12;color:#fff}
+.course-links a.current{background:#e5eeff;color:#24467f;box-shadow:0 2px 8px #07142d15}
+.course-banner .tabbar{max-width:none;padding:0 40px;gap:30px;border-top:1px solid #d1e4ff13;background:#04132712}
+.course-banner .tab{color:#bccde3;padding:14px 0;font-size:14px;border-bottom-width:3px}
+.course-banner .tab:hover{color:#fff;background:transparent;border-color:#b5ceff55}
+.course-banner .tab.active{color:#fff;background:transparent;border-color:#8bb8ff;box-shadow:none}
+.course-banner .tab.active .tab-num{color:#a8cdff}
+.course-banner :focus-visible{outline-color:#a8cdff}
+.course-overview .layout{min-height:calc(100vh - var(--barh,116px))}
+.course-overview .sidebar{top:var(--barh,116px);height:calc(100vh - var(--barh,116px));padding-top:32px;gap:28px}
+.course-overview .nav{gap:8px}
+.course-overview .nav-label{margin-bottom:14px}
+.course-overview .nav-item{padding:14px 12px}
+.course-overview .nav-item b{font-size:15px}
+.course-overview .nav-item small{font-size:12px;margin-top:5px}
+.course-overview .page{border-color:#dfe6f0;box-shadow:0 5px 25px #243d6705}
+.course-overview .sec-head h2{font-size:36px}
+.course-overview .doc,.course-overview .lead,.course-overview .feature p,.course-overview .steps p,.course-overview .checks li,.course-overview .must li{font-size:20px;line-height:1.9;color:#34445c}
+.course-overview .doc{margin:20px 0}
+.course-overview .lead{color:#52627b}
+.course-overview .feature h3,.course-overview .sub-title{font-size:23px}
+.course-overview .steps b,.course-overview .fact b,.course-overview .must-head{font-size:21px}
+.course-overview .mini-stats-label,.course-overview .label{font-size:15px;letter-spacing:.04em}
+.course-overview .mini-stats span,.course-overview .fact span,.course-overview .shot figcaption{font-size:14px}
+.course-overview .mini-stats b{font-size:30px}
+.course-overview .mini-stats div{background:linear-gradient(120deg,#f0f5ff,#f7f9ff);border-left-color:#95b3ed;border-radius:0 8px 8px 0;padding:16px}
+.course-overview .eyebrow{font-size:12px}
+.course-overview .topline,.course-overview .pager{font-size:14px}
+.course-overview .feature{position:relative;background:#fafcff;border-top:3px solid #a8bfee;border-radius:10px;padding:24px}
+.course-overview .feature:nth-child(2){background:#f7fbfc;border-top-color:#90bfc4}
+.course-overview .feature:nth-child(3){background:#fffcf7;border-top-color:#d9bc86}
+.course-overview .feature .fno{font-size:13px}
+.course-overview .feature:hover{box-shadow:0 6px 20px #263f6c09}
+.step{border-top-color:#ccd9ef;box-shadow:0 4px 18px #263f6c04}
+.step-head .badge:not(.wide){box-shadow:inset 0 0 0 1px #7ba4e317}
+.route{border-left:2px solid #8daee6}
+.toc a.active,#tocList a.active,.nav-item.active{background:linear-gradient(90deg,#e6eeff,#eef4ff);border-left-color:#5080e3}
+@media(max-width:1100px){
+ .course-banner .topbar-in{padding:22px 26px;gap:20px}
+ .course-banner .brand{font-size:23px}
+ .course-links a{padding:10px 12px;font-size:13px}
+ .course-banner .tabbar{padding:0 26px}
+}
+@media(max-width:980px){
+ .course-overview .sidebar{top:var(--barh,116px);height:auto;padding:0 16px;z-index:50;gap:0;background:#f7f9fc}
+ .course-overview .nav{gap:12px;padding:0}
+ .course-overview .nav-label{display:none}
+ .course-overview .nav-item{padding:13px 6px}
+ .course-overview .nav-item b{font-size:13px}
+ .course-overview .nav-item.active{background:transparent}
+ .course-overview .intro-grid{gap:26px}
+}
+@media(max-width:760px){
+ .course-banner .topbar-in{min-height:0;flex-wrap:wrap;gap:18px;padding:20px 20px 16px}
+ .course-banner .brand-lockup{gap:12px}
+ .course-banner .brand-mark{width:43px;height:43px;border-radius:12px;font-size:15px}
+ .course-banner .brand{font-size:20px;gap:8px;letter-spacing:0}
+ .course-banner .brand-ver{font-size:10px;padding:2px 6px}
+ .course-banner .brand-sub{font-size:12px;margin-top:6px;letter-spacing:.08em}
+ .course-links{width:100%;gap:4px;padding:4px;border-radius:9px}
+ .course-links a{flex:1;text-align:center;font-size:13px;padding:9px 4px}
+ .course-banner .tabbar{padding:0 20px;gap:18px}
+ .course-banner .tab{font-size:12px;padding:12px 0}
+ .course-banner::before{right:-210px;top:-260px}
+ .course-overview .sec-head h2{font-size:29px}
+ .course-overview .doc,.course-overview .lead,.course-overview .feature p,.course-overview .steps p,.course-overview .checks li,.course-overview .must li{font-size:18px;line-height:1.85}
+ .course-overview .feature h3,.course-overview .sub-title{font-size:21px}
+ .course-overview .steps b,.course-overview .fact b,.course-overview .must-head{font-size:19px}
+ .course-overview .mini-stats div{padding:12px 9px}
+ .course-overview .mini-stats b{font-size:26px}
+ .course-overview .mini-stats span{font-size:13px}
+ .course-overview .layout{min-height:0}
+ .course-overview .page{padding:26px 20px}
+}
+@media print{.course-banner{display:none!important}.course-overview .layout{min-height:0}}
+.step{scroll-margin-top:calc(var(--barh,116px) + 24px)}
