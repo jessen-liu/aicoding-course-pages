@@ -275,3 +275,147 @@ body{background:radial-gradient(ellipse at 100% 10%,#eef3ff 0,transparent 42%),v
 }
 @media print{.course-banner{display:none!important}.course-overview .layout{min-height:0}}
 .step{scroll-margin-top:calc(var(--barh,116px) + 24px)}
+
+/* Edition 3 — an editorial course identity, with a bespoke glass-prism masthead. */
+:root{--navy:#182d46;--accent:#2d5b8f;--accent-soft:#eef3f9;--bg:#f4f5f7;--line:#dfe4ea}
+body{background:radial-gradient(ellipse at 80% 0,#e9eef5 0,transparent 48%),#f4f5f7}
+.course-banner{background:#101f33;border:0;box-shadow:0 8px 28px #15273c0b;overflow:hidden}
+.course-banner::before{inset:0;width:auto;height:auto;border:0;border-radius:0;box-shadow:none;background:radial-gradient(ellipse at 72% 120%,#29456280,transparent 65%),linear-gradient(110deg,#0e1b2d,#182d45);z-index:-1}
+.course-banner::after{display:none}
+.course-banner .topbar-in{min-height:152px;padding:27px 48px;gap:32px;overflow:hidden}
+.course-banner .brand-lockup{position:relative;z-index:1;gap:22px}
+.course-banner .brand-mark{position:relative;width:58px;height:64px;border-radius:17px 17px 20px 5px;transform:none;background:linear-gradient(145deg,#dce9f7,#90adc9 46%,#577494);border:1px solid #f0f7ff85;color:#142b44;box-shadow:inset 1px 1px 1px #ffffffaa,inset -2px -2px 5px #234a6b33,0 12px 30px #0714264d;font-size:21px;letter-spacing:-1px;text-shadow:0 1px 0 #ffffff80}
+.course-banner .brand-mark::after{content:"";position:absolute;right:8px;bottom:8px;width:6px;height:6px;border-radius:50%;background:#f2d2a1;box-shadow:0 0 0 3px #21405b18}
+.course-banner .brand-kicker{display:block;margin-bottom:9px;color:#a7b9cc;font-size:10px;letter-spacing:.24em;line-height:1.4;font-weight:500}
+.course-banner .brand{font-size:32px;font-weight:650;letter-spacing:.045em;gap:16px;color:#f3f5f8;line-height:1.3}
+.course-banner .brand-ver{padding:4px 8px;border:1px solid #b8a3826b;color:#e3c99e;background:#d9bb8620;font-size:10px;letter-spacing:.12em;border-radius:3px;font-weight:500}
+.course-banner .brand-sub{margin-top:10px;font-size:13px;letter-spacing:.18em;color:#acbed2;gap:11px}
+.course-banner .brand-sub::before{width:20px;height:1px;border-radius:0;background:#cdb38b;box-shadow:none}
+.banner-art{position:absolute;right:3%;top:-24px;bottom:-24px;width:720px;background:url('banner-prism.svg') center/contain no-repeat;pointer-events:none}
+.course-links{position:relative;z-index:1;display:flex;gap:40px;padding:0 48px;margin:0;border:0;border-top:1px solid #fff;border-bottom:1px solid #dce2ea;background:#fcfcfd;border-radius:0;box-shadow:0 1px 0 #fff;counter-reset:course-page}
+.course-links a{position:relative;display:flex;align-items:center;gap:10px;flex:none;padding:18px 1px 17px;min-height:56px;box-sizing:border-box;border-radius:0;font-size:14px;line-height:1.3;letter-spacing:.03em;color:#67758a;background:transparent;border-bottom:2px solid transparent;font-weight:500;counter-increment:course-page}
+.course-links a::before{content:"0" counter(course-page);font-size:10px;letter-spacing:.04em;color:#9aa7b8;font-variant-numeric:tabular-nums}
+.course-links a:hover{color:#1e426b;background:transparent;border-bottom-color:#c1cbd9}
+.course-links a.current{background:transparent;color:#203e62;box-shadow:none;border-bottom-color:#aa8d5a;font-weight:700}
+.course-links a.current::before{color:#aa8d5a}
+.course-banner .course-links :focus-visible{outline-color:#6d91b8;outline-offset:-3px}
+.course-banner .tabbar{padding:0 48px;gap:28px;background:#f0f3f7;border:0;border-bottom:1px solid #dce2ea}
+.course-banner .tab{font-size:13px;color:#6e7d90;padding:13px 1px 12px;border-bottom-width:2px;font-weight:500}
+.course-banner .tab:hover{color:#244f7e;border-bottom-color:#c1cfdf}
+.course-banner .tab.active{color:#244f7e;border-bottom-color:#7093b7;font-weight:650}
+.course-banner .tab-num,.course-banner .tab.active .tab-num{color:#8d9eb2;font-size:9px}
+.course-banner .tab.active .tab-num{color:#658ab0}
+.course-banner .tab:focus-visible{outline-color:#6d91b8}
+.course-overview .sidebar,.toc{background:#f6f7f9;border-right:1px solid #e0e5eb}
+.course-overview .nav-label{color:#98a3b0;font-size:9px;letter-spacing:.2em}
+.course-overview .sidebar{padding:34px 18px 22px}
+.course-overview .nav-item{padding:15px 14px;border-left-width:2px;border-radius:0 8px 8px 0}
+.nav-item.active,.toc a.active,#tocList a.active{background:#e9eef5;border-left-color:#9f865e;color:#294d76}
+.course-overview .nav-item.active{background:#e9eef5;border-left-color:#9f865e;color:#294d76}
+.course-overview .nav-item.active .num{color:#a18a65}
+.course-overview .nav-item b{font-weight:650}
+.course-overview .main{padding-top:28px}
+.course-overview .page{position:relative;border:1px solid #e1e6ed;border-radius:16px;box-shadow:0 12px 40px #223b5a06,0 2px 5px #223b5a03;padding-top:44px}
+.course-overview .sec-head{position:relative;padding-bottom:26px;margin-bottom:30px;border-bottom:1px solid #e5e9ef}
+.course-overview .sec-head::before{content:"";position:absolute;bottom:-1px;left:0;width:64px;height:2px;background:#b09a74}
+.course-overview .eyebrow{color:#9a8059;font-size:11px;font-weight:650;letter-spacing:.2em}
+.course-overview .eyebrow::before{width:6px;height:6px;background:#b59b70;border-radius:1px;transform:rotate(45deg)}
+.course-overview .sec-head h2{font-weight:650;letter-spacing:.015em;color:#1d304a}
+.course-overview .lead{color:#738096}
+.course-overview .doc,.course-overview .feature p,.course-overview .steps p,.course-overview .checks li,.course-overview .must li{color:#3e4e64}
+.course-overview .shot{position:relative;padding:8px 8px 12px;background:#fff;border-color:#dce3ed;border-radius:9px;box-shadow:0 10px 22px #1f3b5e0b;transform:rotate(1deg)}
+.course-overview .shot img{border-radius:5px}
+.course-overview .shot figcaption{color:#798699;line-height:1.75}
+.course-overview .mini-stats{gap:0;background:#f5f7fa;border:1px solid #e4e9ef;border-radius:10px;padding:17px 0;margin-top:16px}
+.course-overview .mini-stats div{position:relative;background:transparent;border:0;border-radius:0;padding:2px 22px}
+.course-overview .mini-stats div+div{border-left:1px solid #dfe5ee}
+.course-overview .mini-stats b{font-size:32px;color:#284b74;font-weight:600;letter-spacing:-1px;line-height:1.35}
+.course-overview .mini-stats span{font-size:13px;color:#7b8798;margin-top:5px}
+.course-overview .mini-stats-label,.course-overview .label{font-size:13px;color:#7a8798;font-weight:500;letter-spacing:.06em}
+.course-overview .label{display:flex;align-items:center;gap:10px;margin-top:32px}
+.course-overview .label::before{content:"";width:14px;height:1px;background:#ad9671}
+.course-overview .features{gap:18px;margin-top:20px}
+.course-overview .feature{overflow:hidden;position:relative;padding:26px 24px 28px;background:linear-gradient(150deg,#fff,#f8fafd);border:1px solid #dce3ed;border-radius:11px;box-shadow:0 5px 15px #203c5f04;transition:box-shadow .2s,border-color .2s,transform .2s}
+.course-overview .feature:nth-child(2){background:linear-gradient(150deg,#fff,#f5f9f9);border-color:#dce6e5}
+.course-overview .feature:nth-child(3){background:linear-gradient(150deg,#fff,#fcf9f4);border-color:#e7e1d7}
+.course-overview .feature::before{content:"";position:absolute;top:0;left:24px;width:34px;height:2px;background:#6c8db1}
+.course-overview .feature:nth-child(2)::before{background:#6b9696}
+.course-overview .feature:nth-child(3)::before{background:#b8a07c}
+.course-overview .feature .fno{display:flex;align-items:center;justify-content:center;width:33px;height:33px;background:#eaf0f7;border:1px solid #d8e2ed;border-radius:9px;font-size:11px;color:#557595;font-weight:600;letter-spacing:.06em}
+.course-overview .feature:nth-child(2) .fno{background:#eaf2f1;border-color:#d8e6e4;color:#5a8584}
+.course-overview .feature:nth-child(3) .fno{background:#f5efe5;border-color:#e8dece;color:#a38b63}
+.course-overview .feature h3{margin:21px 0 14px;font-size:23px;font-weight:650;letter-spacing:-.02em;color:#20364f}
+.course-overview .feature p{line-height:1.9}
+.course-overview .feature:hover{border-color:#b3c5dc;box-shadow:0 12px 28px #2945670c;transform:translateY(-3px)}
+.course-overview .feature::after{content:"";position:absolute;top:25px;right:23px;width:35px;height:35px;background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='36' height='36' viewBox='0 0 36 36' fill='none' stroke='%236887aa' stroke-width='1.25'%3E%3Cpath d='m12 10-8 8 8 8m12-16 8 8-8 8M21 5l-6 26'/%3E%3C/svg%3E") center/contain no-repeat;opacity:.65}
+.course-overview .feature:nth-child(2)::after{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='36' height='36' viewBox='0 0 36 36' fill='none' stroke='%236b9290' stroke-width='1.25'%3E%3Cpath d='m18 5 14 8-14 8-14-8 14-8Zm-14 15 14 8 14-8M4 27l14 8 14-8'/%3E%3C/svg%3E")}
+.course-overview .feature:nth-child(3)::after{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='36' height='36' viewBox='0 0 36 36' fill='none' stroke='%23a18c68' stroke-width='1.25'%3E%3Ccircle cx='18' cy='18' r='6'/%3E%3Ccircle cx='7' cy='7' r='3'/%3E%3Ccircle cx='29' cy='7' r='3'/%3E%3Ccircle cx='7' cy='29' r='3'/%3E%3Ccircle cx='29' cy='29' r='3'/%3E%3Cpath d='m9 9 5 5m8 8 5 5m0-18-5 5M9 27l5-5'/%3E%3C/svg%3E")}
+.course-overview .fact,.course-overview .steps li,.course-overview .checks li{background:#fbfcfd;border-color:#e0e6ed;border-radius:10px}
+.course-overview .steps .no{background:#eaf0f6;color:#476b91;border-radius:8px}
+.course-overview .checks li::before{background:#edf3f0;color:#5f8b75}
+.page-foot{border-top-color:#e3e8ee}
+.pager{background:#f8fafc;border-color:#dce3ec;color:#456183}
+.pager:hover:not(:disabled){background:#eef3f9;border-color:#9eb6d0;color:#254f7e}
+.wrap{padding-top:30px}
+.step{position:relative;background:#fff;border:1px solid #dfe5ed;border-radius:13px;box-shadow:0 7px 24px #263e5b05}
+.step::before{content:"";position:absolute;top:-1px;left:36px;width:42px;height:2px;background:#9bb0c8}
+.step-head{padding-bottom:19px;border-bottom:1px solid #e5eaf0}
+.step-title{font-weight:650;color:#21374f}
+.badge{background:#edf2f7;color:#506f91;border-radius:7px;border:1px solid #e0e7f0}
+.step-head .badge:not(.wide){box-shadow:none}
+.course-setup .badge{border:0;background:transparent;color:#21374f}
+.prompt{background:#f4f7fb;border:1px solid #dce4ef;border-left:2px solid #7b97b7;border-radius:9px;padding-top:53px;box-shadow:inset 0 1px 0 #fff}
+.prompt::before{content:"PROMPT";position:absolute;top:19px;left:20px;font-size:9px;line-height:1;letter-spacing:.19em;color:#899ab0;font-weight:600}
+.prompt.no-copy{padding-top:22px}
+.prompt.no-copy::before{display:none}
+.copy{color:#4c6d92;border-color:#d5dfeb;background:#fff;box-shadow:0 2px 3px #263e5b03;font-size:11px}
+.copy:hover{background:#3c638e;border-color:#3c638e}
+.know{background:#f0f6f5;border:1px solid #d6e4df;border-left:2px solid #87aaa0}
+.know .kbadge{background:#e3eeea;color:#66877b;border-radius:4px}
+.know .ktext{color:#446459}
+.route{color:#5a7494;background:#eef2f7;border-left-color:#a1b5ce}
+.filecard{background:#fafbfd;border-color:#e0e5ed;box-shadow:0 3px 8px #273f6003}
+.filecard .fdl,.btnlink{background:#375d88;box-shadow:0 3px 8px #284c7520}
+.filecard .ficon{color:#6c8199;background:#edf1f6;border:1px solid #dfe5ed}
+.summary,.must{background:#fcf8ef;border-color:#e9dfcc;border-left-color:#bda376}
+.legend{border-color:#e0e6ed;box-shadow:0 3px 10px #273f6003}
+.legend .dot.main{background:#6587ad}.legend .dot.sub{background:#c3a26e}
+.toc-head{color:#67768a;font-size:11px;font-weight:500;letter-spacing:.08em}
+.toc a,#tocList a{font-size:13px;color:#7b8798}
+.toc a.active,#tocList a.active{font-weight:650;color:#345b86}
+.toc-toggle{background:#355e8e;box-shadow:0 7px 18px #1c3e6424}
+@media(min-width:1600px){.course-banner .topbar-in{padding-left:56px;padding-right:56px}.course-links,.course-banner .tabbar{padding-left:56px;padding-right:56px}.banner-art{right:8%}}
+@media(max-width:1100px){.course-banner .topbar-in{padding:25px 30px;min-height:142px}.course-banner .brand{font-size:28px}.course-banner .brand-lockup{gap:18px}.banner-art{right:-160px;opacity:.65}.course-links,.course-banner .tabbar{padding-left:30px;padding-right:30px}}
+@media(max-width:760px){
+ .course-banner .topbar-in{min-height:125px;padding:23px 20px}
+ .course-banner .brand-lockup{gap:14px}
+ .course-banner .brand-mark{width:40px;height:46px;border-radius:11px 11px 14px 4px;font-size:16px}
+ .course-banner .brand-mark::after{width:4px;height:4px;right:6px;bottom:6px}
+ .course-banner .brand-kicker{font-size:8px;letter-spacing:.17em;margin-bottom:7px}
+ .course-banner .brand{font-size:20px;gap:8px;letter-spacing:0}
+ .course-banner .brand-ver{font-size:9px;padding:3px 5px}
+ .course-banner .brand-sub{font-size:11px;letter-spacing:.08em;margin-top:8px}
+ .course-banner .brand-sub::before{width:12px}
+ .banner-art{top:-8px;bottom:-35px;right:-260px;width:520px;opacity:.28}
+ .course-links{width:auto;gap:0;padding:0 14px;justify-content:space-between;border-radius:0}
+ .course-links a{flex:0 1 auto;padding:16px 5px;min-height:51px;gap:7px;font-size:13px;letter-spacing:0}
+ .course-links a::before{font-size:8px}
+ .course-banner .tabbar{padding:0 20px;gap:18px}
+ .course-banner .tab{font-size:12px;padding:12px 0}
+ .course-overview .sidebar{padding:0 15px}
+ .course-overview .nav-item{padding:13px 6px;border-radius:0}
+ .course-overview .nav-item.active{background:transparent;border-bottom-color:#a28a62}
+ .course-overview .main{padding-top:20px}
+ .course-overview .page{padding-top:30px;border-radius:12px}
+ .course-overview .shot{transform:none}
+ .course-overview .mini-stats{padding:13px 0}
+ .course-overview .mini-stats div{padding:0 9px}
+ .course-overview .mini-stats b{font-size:26px}
+ .course-overview .mini-stats span{font-size:12px}
+ .course-overview .feature{padding:24px 22px}
+ .step{border-radius:11px}.step::before{left:18px;width:32px}
+ .prompt{padding-top:51px}.prompt::before{top:27px;left:15px}.copy{margin-top:-37px;margin-bottom:16px}
+ .task .prompt{padding-top:51px}
+ .prompt.no-copy{padding-top:20px}
+}
+@media print{body{background:#fff!important}.course-banner,.banner-art{display:none!important}.course-overview .page,.step{box-shadow:none}.step::before,.prompt::before{display:none}.course-overview .shot{transform:none}}
