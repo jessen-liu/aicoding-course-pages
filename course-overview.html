@@ -191,6 +191,14 @@ button{font-family:inherit}
   .panel+.panel{margin-top:30px;padding-top:20px;border-top:1px solid var(--line)}
   a{color:inherit}
 }
+
+/* Downloads beside the relevant learner preparation item. */
+.prep-copy{flex:1;min-width:0}
+.prep-heading{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}
+.prep-heading b{margin-bottom:0}
+.prep-download{display:inline-flex;align-items:center;justify-content:center;flex:none;white-space:nowrap;padding:9px 15px;min-height:42px;box-sizing:border-box;border:1px solid #375d88;font-weight:600;line-height:1.6}
+.prep-download:hover{background:#294d75;color:#fff;text-decoration:none}
+.prep-download:visited{color:#fff}
 </style>
 <link rel="stylesheet" href="assets/course-theme.css?v=3">
 </head>
@@ -317,11 +325,11 @@ button{font-family:inherit}
           </li>
           <li>
             <span class="no">2</span>
-            <div><b>下载并注册 WorkBuddy</b><p>下载 WorkBuddy 最新版，并注册成功；</p></div>
+            <div class="prep-copy"><div class="prep-heading"><b>下载并注册 WorkBuddy</b><a class="btnlink prep-download" href="https://www.workbuddy.cn/events/invite?inviteCode=p0qmnwx92yrzfmv" target="_blank" rel="noopener noreferrer">下载Workbuddy</a></div><p>下载 WorkBuddy 最新版，并注册成功；</p></div>
           </li>
           <li>
             <span class="no">3</span>
-            <div><b>升级 WeLink 与员工助手</b><p>把 WeLink 和员工助手升级到最新版本；</p></div>
+            <div class="prep-copy"><div class="prep-heading"><b>升级 WeLink 与员工助手</b><a class="btnlink prep-download" href="https://his.huawei.com/csop/index.html#/ToolInfo?samType=his&amp;toolId=1706591788617216002" target="_blank" rel="noopener noreferrer">下载员工助手（桌面）</a></div><p>把 WeLink 和员工助手升级到最新版本；</p></div>
           </li>
           <li>
             <span class="no">4</span>
