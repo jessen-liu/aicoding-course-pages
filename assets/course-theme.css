@@ -375,7 +375,7 @@ body{background:radial-gradient(ellipse at 80% 0,#e9eef5 0,transparent 48%),#f4f
 .know .ktext{color:#446459}
 .route{color:#5a7494;background:#eef2f7;border-left-color:#a1b5ce}
 .filecard{background:#fafbfd;border-color:#e0e5ed;box-shadow:0 3px 8px #273f6003}
-.filecard .fdl,.btnlink{background:#375d88;box-shadow:0 3px 8px #284c7520}
+.filecard .fdl,.btnlink{background:#375d88;color:#fff;box-shadow:0 3px 8px #284c7520}
 .filecard .ficon{color:#6c8199;background:#edf1f6;border:1px solid #dfe5ed}
 .summary,.must{background:#fcf8ef;border-color:#e9dfcc;border-left-color:#bda376}
 .legend{border-color:#e0e6ed;box-shadow:0 3px 10px #273f6003}
